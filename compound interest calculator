@@ -1,0 +1,25 @@
+import kotlin.math.pow
+
+class Arguments(
+    var startAmount: Int = 1000, // Начальная сумма
+    var yearlyPercent: Int = 5, // Годовой процент
+    var deposit: Int = 10, // Депозит
+)
+
+fun main() {
+    val arguments = Arguments()
+    val parameter = readLine()!!.toString() // Параметр, который изменил клиент
+    val value = readLine()!!.toInt() // Значение параметра
+
+    when (parameter) {
+        "amount" -> arguments.startAmount = value
+        "percent" -> arguments.yearlyPercent = value
+        "years" -> arguments.deposit = value
+    }
+
+    // FinalAmount = startingAmount * (1 + yearlyPercent / 100)^years
+
+    val power = (1 + arguments.yearlyPercent.toDouble() / 100).toDouble()
+    val finalAmount = arguments.startAmount * power.pow(arguments.deposit.toInt())
+    println(finalAmount.toInt())
+}
